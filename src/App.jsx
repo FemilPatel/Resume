@@ -12,6 +12,7 @@ import {
   Code,
   Smartphone,
   Globe,
+  Download,
 } from "lucide-react";
 
 const App = () => {
@@ -160,6 +161,15 @@ const App = () => {
     },
   ];
 
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = "/Femil_Sabhaya_Resume.pdf";
+    link.download = "Femil_Sabhaya_Resume.pdf"; // Optional: specify the filename
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Navigation */}
@@ -259,12 +269,21 @@ const App = () => {
                 <span>+91-9726009509</span>
               </div>
             </div>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-full text-lg font-medium hover:scale-105 transition-transform duration-200"
-            >
-              Get In Touch
-            </button>
+            <div className="flex justify-center space-x-4 mb-8">
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-full text-lg font-medium hover:scale-105 transition-transform duration-200"
+              >
+                Get In Touch
+              </button>
+              <button
+                className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-8 py-3 rounded-full text-lg font-medium hover:scale-105 transition-transform duration-200 flex items-center space-x-2"
+                onClick={handleDownload}
+              >
+                <Download size={20} />
+                <span>Download Resume</span>
+              </button>
+            </div>
           </div>
           <ChevronDown
             className="mx-auto text-white animate-bounce cursor-pointer"
