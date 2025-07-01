@@ -186,7 +186,7 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
-              <Sparkles className="inline-block w-6 h-6 mr-2 text-cyan-400" />
+              <Sparkles className="inline-block w-6 h-6 mr-2 text-cyan-400 drop-shadow-lg" />
               Femil Sabhaya
             </div>
 
@@ -217,20 +217,25 @@ const App = () => {
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Enhanced Mobile Menu Button */}
             <button
-              className="md:hidden text-white p-2 rounded-lg bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+              className="md:hidden relative text-white p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 via-blue-500/20 to-purple-500/20 backdrop-blur-sm hover:from-cyan-500/30 hover:via-blue-500/30 hover:to-purple-500/30 transition-all duration-300 transform hover:scale-105 border border-white/20 shadow-lg hover:shadow-cyan-500/25"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-400/10 to-purple-400/10 animate-pulse"></div>
+              {isMenuOpen ? (
+                <X size={24} className="relative z-10 drop-shadow-sm" />
+              ) : (
+                <Menu size={24} className="relative z-10 drop-shadow-sm" />
+              )}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Enhanced Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-black/90 backdrop-blur-xl border-t border-white/20">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="md:hidden bg-gradient-to-b from-black/95 via-gray-900/95 to-black/95 backdrop-blur-2xl border-t border-white/20 shadow-2xl">
+            <div className="px-4 pt-4 pb-6 space-y-2">
               {[
                 "Home",
                 "About",
@@ -238,18 +243,54 @@ const App = () => {
                 "Skills",
                 "Projects",
                 "Contact",
-              ].map((item) => (
+              ].map((item, index) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
-                  className="block px-4 py-3 text-base font-medium text-gray-300 hover:text-white hover:bg-white/10 w-full text-left rounded-lg transition-all duration-300"
+                  className={`group relative block w-full px-6 py-4 text-left rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5 ${
+                    activeSection === item.toLowerCase()
+                      ? "bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 text-cyan-300 border border-cyan-400/30 shadow-lg shadow-cyan-500/20"
+                      : "text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-white/10 hover:to-white/5 border border-transparent hover:border-white/20"
+                  }`}
+                  style={{
+                    animationDelay: `${index * 0.1}s`,
+                    animation: isMenuOpen
+                      ? "slideInFromRight 0.3s ease-out forwards"
+                      : "none",
+                  }}
                 >
-                  {item}
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="relative z-10 flex items-center justify-between">
+                    <span className="text-base font-medium">{item}</span>
+                    {activeSection === item.toLowerCase() && (
+                      <div className="w-2 h-2 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400 animate-pulse shadow-lg shadow-cyan-400/50"></div>
+                    )}
+                  </div>
+
+                  {/* Animated border effect */}
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></div>
                 </button>
               ))}
             </div>
+
+            {/* Decorative bottom gradient */}
+            <div className="h-2 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 blur-sm"></div>
           </div>
         )}
+
+        {/* Add keyframes for slide animation */}
+        <style jsx>{`
+          @keyframes slideInFromRight {
+            0% {
+              opacity: 0;
+              transform: translateX(20px);
+            }
+            100% {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+        `}</style>
       </nav>
 
       {/* Hero Section */}
