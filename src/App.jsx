@@ -259,7 +259,7 @@ const App = () => {
       >
         <div className="text-center px-4 relative z-10">
           <div className="mb-8">
-            <div className="w-40 h-40 mx-auto mb-8 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 flex items-center justify-center shadow-2xl animate-float relative">
+            <div className="w-40 h-40 mx-auto mt-8 mb-8 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 flex items-center justify-center shadow-2xl animate-float relative">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 animate-spin-slow opacity-75 blur-sm"></div>
               <Code size={80} className="text-white relative z-10" />
             </div>
